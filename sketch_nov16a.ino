@@ -4,7 +4,7 @@ SoftwareSerial mySerial(10, 11);
 
 int pinTrig[2] = {2, 6};
 int pinEcho[2] = {3, 7};
-char c;
+byte c;
 int L[2] = {0,0};
 int T;
 int n[4] = {0, 0 ,0, 0};
