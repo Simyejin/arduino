@@ -23,7 +23,7 @@ void setup()
 void loop() {
   if (mySerial.available()){  //mySerial
     c = mySerial.read();  //mySerial
-    if (c=='g'){
+    while (c=='g'){
     for (int i = 0; i<2;i++){
       digitalWrite(pinTrig[i], LOW); delayMicroseconds(2);
       digitalWrite(pinTrig[i], HIGH); delayMicroseconds(10);
@@ -34,15 +34,22 @@ void loop() {
       L[i] = T/58.82;
     
       if (L[i] < 20) {
-          n[i] = i;
-          mySerial.write(n[i]);  //mySerial
+          if (i == 0)
+            mySerial.write('n');
+          else
+            mySerial.write('N');
       }
       else if (L[i] >= 20){
-          n[i+2] = i + 2;
-          mySerial.write(n[i + 2]);  //mySerial
+           if (i == 0)
+            mySerial.write('y');
+          else
+            mySerial.write('Y');
       }
-     }
-
-  }
+    }
+    if (c != 'g'){
+      break;
+    }
+    delay(1000);
+   }
   }
 }
