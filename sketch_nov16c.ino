@@ -3,8 +3,8 @@
 SoftwareSerial mySerial(10, 11);
 
 int led[2] = {12, 13};
-char c;
-int r;
+byte c;
+byte r;
 
 void setup()
 {
@@ -14,25 +14,21 @@ void setup()
       pinMode(led[i], OUTPUT);
 }
 
-void susin(int r) {
+void susin(byte r) {
   switch (r){
-    case 0:
-    digitalWrite(led[0], LOW);
-    break;
-    case 1:
-    digitalWrite(led[1], LOW);
-    break;
-    case 2:
+    case 'n':
     digitalWrite(led[0], HIGH);
     break;
-    case 3:
+    case 'N':
     digitalWrite(led[1], HIGH);
     break;
-    default:
+    case 'y':
     digitalWrite(led[0], LOW);
+    break;
+    case 'Y':
     digitalWrite(led[1], LOW);
     break;
-  }
+    }
 }
 
 void loop() {
