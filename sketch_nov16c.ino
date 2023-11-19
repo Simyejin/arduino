@@ -3,8 +3,8 @@
 SoftwareSerial mySerial(10, 11);
 
 int led[2] = {12, 13};
-byte c;
-byte r;
+char c;
+char r;
 
 void setup()
 {
@@ -14,21 +14,21 @@ void setup()
       pinMode(led[i], OUTPUT);
 }
 
-void susin(byte r) {
+void susin(char r) {
   switch (r){
     case 'n':
+    digitalWrite(led[0], LOW);
+    break;
+    case 'y':
     digitalWrite(led[0], HIGH);
     break;
     case 'N':
-    digitalWrite(led[1], HIGH);
-    break;
-    case 'y':
-    digitalWrite(led[0], LOW);
-    break;
-    case 'Y':
     digitalWrite(led[1], LOW);
     break;
-    }
+    case 'Y':
+    digitalWrite(led[1], HIGH);
+    break;
+  }
 }
 
 void loop() {
@@ -40,4 +40,4 @@ void loop() {
     r = mySerial.read();
     susin(r);
   }
-} 
+}
