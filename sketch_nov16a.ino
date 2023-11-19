@@ -4,7 +4,7 @@ SoftwareSerial mySerial(10, 11);
 
 int pinTrig[2] = {2, 6};
 int pinEcho[2] = {3, 7};
-byte c;
+char c;
 int L[2] = {0,0};
 int T;
 int n[4] = {0, 0 ,0, 0};
@@ -24,32 +24,40 @@ void loop() {
   if (mySerial.available()){  //mySerial
     c = mySerial.read();  //mySerial
     while (c=='g'){
-    for (int i = 0; i<2;i++){
-      digitalWrite(pinTrig[i], LOW); delayMicroseconds(2);
-      digitalWrite(pinTrig[i], HIGH); delayMicroseconds(10);
-      digitalWrite(pinTrig[i], LOW);
-    
-      T = pulseIn(pinEcho[i], HIGH);
-    
-      L[i] = T/58.82;
-    
-      if (L[i] < 20) {
-          if (i == 0)
+      for (int i = 0; i<2;i++){
+        digitalWrite(pinTrig[i], LOW); delayMicroseconds(2);
+        digitalWrite(pinTrig[i], HIGH); delayMicroseconds(10);
+        digitalWrite(pinTrig[i], LOW);
+
+        T = pulseIn(pinEcho[i], HIGH);
+
+        L[i] = T/58.82;
+
+        if ( i == 0) {
+          if (L[0] < 20) {
             mySerial.write('n');
-          else
-            mySerial.write('N');
-      }
-      else if (L[i] >= 20){
-           if (i == 0)
+
+          }
+          else if (L[0] >= 20){
             mySerial.write('y');
-          else
+          }
+        }
+
+        else if ( i == 1 ) {
+          if (L[1] < 20) {
+            mySerial.write('N');
+          }
+          else if (L[1] >= 20){
             mySerial.write('Y');
-      }
-    }
-    if (c != 'g'){
+          }
+        }
+     }
+     Serial.print('\n');
+
+     if (c != 'g'){
       break;
-    }
-    delay(1000);
+     }
+     delay(1000);
    }
   }
 }
