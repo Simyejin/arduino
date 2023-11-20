@@ -166,14 +166,14 @@ void loop() {
 
     if (p.y > 40) {
        if (p.y < 140) {
-        bustouch();
-        //c = 'g';
+          bustouch();
+          c = 'g';
        }
     }
     if (p.y < 100 && p.y > 20) {
        if (p.x < 300 && p.x > 250) {
           busmain();
-          //c = 'e';
+          c = 'e';
        }
     }
   }
